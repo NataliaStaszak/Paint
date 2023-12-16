@@ -15,6 +15,7 @@ namespace WpfApplication1
         private SolidColorBrush currentColor = Brushes.Black;
         private double currentSize = 2;
         private bool isDrawClicked=true;
+        private bool isPointClicked = false;
 
         public MainWindow()
         {
@@ -30,7 +31,19 @@ namespace WpfApplication1
                     isDrawing = true;
                 }
             }
-            
+            if (isPointClicked == true)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    //isDrawing = true;
+                    double x = e.GetPosition(canvas).X;
+                    double y = e.GetPosition(canvas).Y;
+
+
+                    DrawPoint(x, y, currentSize, currentColor);
+                }
+            }
+
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -80,24 +93,12 @@ namespace WpfApplication1
         {
             return new Line { X1 = 0, Y1 = 0, X2 = 50, Y2 = 50, Stroke = currentColor, StrokeThickness = currentSize };
         }
-        /*private void point(object sender, RoutedEventArgs e)
+        
+        private void point(object sender, RoutedEventArgs e)
         {
-            //Ellipse elipse = DrawPiont(currentSize, 2,2);
-            Ellipse elipse= DrawPiont(1,1,1);
-            canvas.Children.Add(elipse);
+            isDrawClicked = false;
+            isPointClicked = true;
         }
-        private Ellipse DrawPiont(double size, double x, double y){
-            Ellipse elipse = new Ellipse();
-            elipse.Width = currentSize;
-            elipse.Height = currentSize;
-            /*Canvas.SetTop(elipse, y - elipse.Height / 2);
-            Canvas.SetLeft(elipse, x - elipse.Width / 2);
-
-            Brush brushColor = new SolidColorBrush(currentColor.Color);*/
-
-        //return elipse;
-        //}/*
-        /*
         private void DrawPoint(double x, double y, double diameter, Brush color)
         {
             Ellipse ellipse = new Ellipse();
@@ -109,10 +110,6 @@ namespace WpfApplication1
             Canvas.SetTop(ellipse, y - diameter / 2);
 
             canvas.Children.Add(ellipse);
-        }*/
-        private void point(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
         }
 
     }
