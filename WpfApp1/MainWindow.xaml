@@ -41,13 +41,22 @@
                 <Button Grid.Column="0" Content="Wyczyść" Width="150" Click="ClearButton_Click" Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysyj swobodnie" Width="150" Click="draw"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj swobodnie" Width="150" Click="draw"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysyj punkt" Width="150" Click="point"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj punkt" Width="150" Click="point"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysyj linie" Width="150" Click="line"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj linie" Width="150" Click="line"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="rysuj koło" Width="150" Click="circle"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="rysuj prostokąt" Width="150" Click="rectangle"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="rysuj kwadrat" Width="150" Click="square"  Background="Pink"/>
             </GroupBox>
             
            
