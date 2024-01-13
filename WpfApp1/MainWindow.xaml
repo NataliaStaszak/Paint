@@ -25,7 +25,12 @@
                     <ComboBoxItem Content="Różowy" Background="HotPink"/>
                     <ComboBoxItem Content="Czarny" Background="Black"/>
                     <ComboBoxItem Content="Szary" Background="DimGray"/>
+                    <ComboBoxItem Content="own" Background="Bisque"/>
                 </ComboBox>
+            </GroupBox>
+           
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="wlasny kolor" Width="150" Click="custom"  Background="Pink"/>
             </GroupBox>
 
             <GroupBox Grid.Column="0" Header="Grubość linii" Background="MistyRose">
@@ -36,8 +41,15 @@
                 <Button Grid.Column="0" Content="Wyczyść" Width="150" Click="ClearButton_Click" Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="rysyj swobodnie" Width="150" Click="draw"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
                 <Button Grid.Column="0" Content="rysyj punkt" Width="150" Click="point"  Background="Pink"/>
             </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="rysyj linie" Width="150" Click="line"  Background="Pink"/>
+            </GroupBox>
+            
            
            
 

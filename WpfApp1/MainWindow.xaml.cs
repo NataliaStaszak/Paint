@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using WpfApp1;
 using Point = System.Windows.Point;
 
 namespace WpfApplication1
@@ -12,14 +13,16 @@ namespace WpfApplication1
     {
         private bool isDrawing = false;
         private Point startPoint;
-        private SolidColorBrush currentColor = Brushes.Black;
+        public static SolidColorBrush? currentColor { get; set; }
         private double currentSize = 2;
         private bool isDrawClicked=true;
         private bool isPointClicked = false;
+        private bool isLineClicked = false;
 
         public MainWindow()
         {
             InitializeComponent();
+            currentColor = Brushes.Black;
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,7 +38,18 @@ namespace WpfApplication1
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    //isDrawing = true;
+                    double x = e.GetPosition(canvas).X;
+                    double y = e.GetPosition(canvas).Y;
+
+
+                    DrawPoint(x, y, currentSize, currentColor);
+                }
+            }
+            if (isLineClicked == true)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    isDrawing = true;
                     double x = e.GetPosition(canvas).X;
                     double y = e.GetPosition(canvas).Y;
 
@@ -77,6 +91,7 @@ namespace WpfApplication1
         {
             ComboBoxItem selectedItem = (ComboBoxItem)colorComboBox.SelectedItem;
             currentColor = (SolidColorBrush)selectedItem.Background;
+            
         }
 
         private void SizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -97,6 +112,7 @@ namespace WpfApplication1
         private void point(object sender, RoutedEventArgs e)
         {
             isDrawClicked = false;
+            isLineClicked = false;
             isPointClicked = true;
         }
         private void DrawPoint(double x, double y, double diameter, Brush color)
@@ -111,6 +127,25 @@ namespace WpfApplication1
 
             canvas.Children.Add(ellipse);
         }
+
+        private void line(object sender, RoutedEventArgs e)
+        {
+            isDrawClicked = false;
+            isLineClicked = true;
+            isPointClicked = false;
+        }
+        private void draw(object sender, RoutedEventArgs e)
+        {
+            isDrawClicked = true;
+            isLineClicked = false;
+            isPointClicked = false;
+        }
+        private void custom(object sender, RoutedEventArgs e)
+        {
+            Window1 secondWindow = new Window1();
+            secondWindow.Show();
+        }
+
 
     }
 }

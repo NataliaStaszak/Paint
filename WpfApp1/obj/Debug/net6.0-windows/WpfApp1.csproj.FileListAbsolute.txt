@@ -58,3 +58,6 @@ C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows
 C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.pdb
 C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.genruntimeconfig.cache
 C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\ref\WpfApp1.dll
+C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\Window1.g.cs
+C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\WpfApp1_MarkupCompile.lref
+C:\Users\na200\Documents\Cyrk\Grafika\Kuba\Lab1\WpfApp1\obj\Debug\net6.0-windows\Window1.baml
