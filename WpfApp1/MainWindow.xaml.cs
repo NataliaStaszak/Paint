@@ -30,6 +30,8 @@ namespace WpfApplication1
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            double x = e.GetPosition(canvas).X;
+            double y = e.GetPosition(canvas).Y;
             if (isDrawClicked){
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
@@ -40,58 +42,30 @@ namespace WpfApplication1
             if (isPointClicked)
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
-                {
-                    double x = e.GetPosition(canvas).X;
-                    double y = e.GetPosition(canvas).Y;
-
-
-                    DrawPoint(x, y, currentSize, currentColor);
-                }
+                    DrawPoint(x, y);
             }
             if (isLineClicked)
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
                     isDrawing = true;
-                    double x = e.GetPosition(canvas).X;
-                    double y = e.GetPosition(canvas).Y;
-
-
-                    DrawPoint(x, y, currentSize, currentColor);
+                    DrawPoint(x, y);
                 }
             }
             if (isCircleClicked)
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
-                {
-                    double x = e.GetPosition(canvas).X;
-                    double y = e.GetPosition(canvas).Y;
-
-
-                    drawCircle(x, y, currentSize);
-                }
+                    drawCircle(x, y);
             }
             if (isRectangleClicked)
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
-                {
-                    double x = e.GetPosition(canvas).X;
-                    double y = e.GetPosition(canvas).Y;
-
-
-                    drawRectangle(x, y, currentSize);
-                }
+                    drawRectangle(x, y);               
             }
             if (isSquareClicked)
             {
-                if (e.LeftButton == MouseButtonState.Pressed)
-                {
-                    double x = e.GetPosition(canvas).X;
-                    double y = e.GetPosition(canvas).Y;
-
-
-                    drawSquare(x, y, currentSize);
-                }
+                if (e.LeftButton == MouseButtonState.Pressed)              
+                    drawSquare(x, y);                
             }
 
 
@@ -124,11 +98,17 @@ namespace WpfApplication1
             isDrawing = false;
         }
 
+        //Buttons Fun
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)colorComboBox.SelectedItem;
             currentColor = (SolidColorBrush)selectedItem.Background;
             
+        }
+        private void customButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 secondWindow = new Window1();
+            secondWindow.Show();
         }
 
         private void SizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -136,129 +116,110 @@ namespace WpfApplication1
             currentSize = sizeSlider.Value;
         }
 
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        private void clearButton_Click(object sender, RoutedEventArgs e)
         {
             canvas.Children.Clear();
         }
-
-        private Shape Line(Shape line)
+        private void drawButton_Click(object sender, RoutedEventArgs e)
         {
-            return new Line { X1 = 0, Y1 = 0, X2 = 50, Y2 = 50, Stroke = currentColor, StrokeThickness = currentSize };
+            setAllFalse();
+            isDrawClicked = true;
+        }
+
+        private void pointButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isPointClicked = true;     
+        }
+
+        private void lineButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isLineClicked = true;
+        }
+        private void circleButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isCircleClicked = true;
         }
         
-        private void DrawPoint(double x, double y, double diameter, Brush color)
+        private void rectangleButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isRectangleClicked = true;
+        }
+        private void squareButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isSquareClicked = true;
+        }
+
+        //drawing fun
+        private void DrawPoint(double x, double y)
         {
             Ellipse ellipse = new Ellipse();
-            ellipse.Width = diameter;
-            ellipse.Height = diameter;
-            ellipse.Fill = color;
+            ellipse.Width = currentSize;
+            ellipse.Height = currentSize;
+            ellipse.Fill = currentColor;
 
-            Canvas.SetLeft(ellipse, x - diameter / 2);
-            Canvas.SetTop(ellipse, y - diameter / 2);
+            Canvas.SetLeft(ellipse, x - currentSize / 2);
+            Canvas.SetTop(ellipse, y - currentSize / 2);
 
             canvas.Children.Add(ellipse);
         }
-        private void point(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
-            isLineClicked = false;
-            isPointClicked = true;
-            isCircleClicked = false;
-            isRectangleClicked = false;
-            isSquareClicked = false;
-        }
-
-        private void line(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
-            isLineClicked = true;
-            isPointClicked = false;
-            isCircleClicked = false;
-            isRectangleClicked = false;
-            isSquareClicked = false;
-    }
-        private void circle(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
-            isLineClicked = false;
-            isPointClicked = false;
-            isCircleClicked = true;
-            isRectangleClicked = false;
-            isSquareClicked = false;
-        }
-        private void draw(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = true;
-            isLineClicked = false;
-            isPointClicked = false;
-            isRectangleClicked = false;
-            isSquareClicked = false;
-        }
-        private void rectangle(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
-            isLineClicked = false;
-            isPointClicked = false;
-            isCircleClicked = false;
-            isRectangleClicked = true;
-            isSquareClicked = false;
-        }
-        private void square(object sender, RoutedEventArgs e)
-        {
-            isDrawClicked = false;
-            isLineClicked = false;
-            isPointClicked = false;
-            isCircleClicked = false;
-            isRectangleClicked = false;
-            isSquareClicked = true;
-        }
-        private void custom(object sender, RoutedEventArgs e)
-        {
-            Window1 secondWindow = new Window1();
-            secondWindow.Show();
-        }
-        private void drawCircle(double x, double y, double radius)
+        private void drawCircle(double x, double y)
         {
             var bauble = new Ellipse
             {
-                Width = radius * 10,
-                Height = radius * 10,
+                Width = currentSize * 10,
+                Height = currentSize * 10,
                 StrokeThickness = 3,
                 Stroke = currentColor
                 
             };
-            Canvas.SetLeft(bauble, x - radius / 2);
-            Canvas.SetTop(bauble, y - radius / 2);
+            Canvas.SetLeft(bauble, x - currentSize / 2);
+            Canvas.SetTop(bauble, y - currentSize / 2);
             canvas.Children.Add(bauble);
         }
-        private void drawRectangle(double x, double y, double radius)
+        private void drawRectangle(double x, double y)
         {
             var bauble = new System.Windows.Shapes.Rectangle
             {
-                Width = radius * 30,
-                Height = radius * 10,
+                Width = currentSize * 30,
+                Height = currentSize * 10,
                 StrokeThickness = 3,
                 Stroke = currentColor
 
             };
-            Canvas.SetLeft(bauble, x - radius / 2);
-            Canvas.SetTop(bauble, y - radius / 2);
+            Canvas.SetLeft(bauble, x - currentSize / 2);
+            Canvas.SetTop(bauble, y - currentSize / 2);
             canvas.Children.Add(bauble);
         }
-        private void drawSquare(double x, double y, double radius)
+        private void drawSquare(double x, double y)
         {
             var bauble = new System.Windows.Shapes.Rectangle
             {
-                Width = radius * 10,
-                Height = radius * 10,
+                Width = currentSize * 10,
+                Height = currentSize * 10,
                 StrokeThickness = 3,
                 Stroke = currentColor
 
             };
-            Canvas.SetLeft(bauble, x - radius / 2);
-            Canvas.SetTop(bauble, y - radius / 2);
+            Canvas.SetLeft(bauble, x - currentSize / 2);
+            Canvas.SetTop(bauble, y - currentSize / 2);
             canvas.Children.Add(bauble);
         }
+
+        //help
+        private void setAllFalse()
+        {
+            isDrawClicked = false;
+            isLineClicked = false;
+            isPointClicked = false;
+            isCircleClicked = false;
+            isRectangleClicked = false;
+            isSquareClicked = false;
+        } 
 
 
 

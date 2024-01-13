@@ -30,7 +30,7 @@
             </GroupBox>
            
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="wlasny kolor" Width="150" Click="custom"  Background="Pink"/>
+                <Button Grid.Column="0" Content="wlasny kolor" Width="150" Click="customButton_Click"  Background="Pink"/>
             </GroupBox>
 
             <GroupBox Grid.Column="0" Header="Grubość linii" Background="MistyRose">
@@ -38,25 +38,25 @@
             </GroupBox>
 
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="Wyczyść" Width="150" Click="ClearButton_Click" Background="Pink"/>
+                <Button Grid.Column="0" Content="Wyczyść" Width="150" Click="clearButton_Click" Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj swobodnie" Width="150" Click="draw"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj swobodnie" Width="150" Click="drawButton_Click"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj punkt" Width="150" Click="point"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj punkt" Width="150" Click="pointButton_Click"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj linie" Width="150" Click="line"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj linie" Width="150" Click="lineButton_Click"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj koło" Width="150" Click="circle"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj koło" Width="150" Click="circleButton_Click"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj prostokąt" Width="150" Click="rectangle"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj prostokąt" Width="150" Click="rectangleButton_Click"  Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="rysuj kwadrat" Width="150" Click="square"  Background="Pink"/>
+                <Button Grid.Column="0" Content="rysuj kwadrat" Width="150" Click="squareButton_Click"  Background="Pink"/>
             </GroupBox>
             
            
