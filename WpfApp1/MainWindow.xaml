@@ -38,7 +38,7 @@
             </GroupBox>
 
             <GroupBox Grid.Column="0">
-                <Button Grid.Column="0" Content="Wyczyść" Width="150" Click="clearButton_Click" Background="Pink"/>
+                <Button Grid.Column="0" Content="wyczyść" Width="150" Click="clearButton_Click" Background="Pink"/>
             </GroupBox>
             <GroupBox Grid.Column="0">
                 <Button Grid.Column="0" Content="rysuj swobodnie" Width="150" Click="drawButton_Click"  Background="Pink"/>
@@ -57,6 +57,9 @@
             </GroupBox>
             <GroupBox Grid.Column="0">
                 <Button Grid.Column="0" Content="rysuj kwadrat" Width="150" Click="squareButton_Click"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="narzędzie obróbki obrazów" Width="150" Click="pictureButton_Click"  Background="Pink"/>
             </GroupBox>
             
            

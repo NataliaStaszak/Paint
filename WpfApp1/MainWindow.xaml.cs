@@ -25,7 +25,7 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
-            currentColor = Brushes.Black;
+            currentColor =System.Windows.Media.Brushes.Black;
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -152,6 +152,11 @@ namespace WpfApplication1
         {
             setAllFalse();
             isSquareClicked = true;
+        }
+        private void pictureButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window2 newWindow = new Window2();
+            newWindow.Show();
         }
 
         //drawing fun
