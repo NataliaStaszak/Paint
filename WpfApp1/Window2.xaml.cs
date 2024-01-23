@@ -45,7 +45,7 @@ namespace WpfApp1
             imageBrush.ImageSource = bitmapPicture;
 
             plainPicture.Fill= imageBrush;
-            srcLabel.Content= String.Format("src: {0}%", pictureSrc);
+            srcLabel.Content= String.Format("src: {0}", pictureSrc);
         }
         private void mapButton_Click(object sender, RoutedEventArgs e)
         {
@@ -53,33 +53,46 @@ namespace WpfApp1
         }
         private void filterButton_Click(object sender, RoutedEventArgs e)
         {
-            Image<Bgr, byte> img1 = new Image<Bgr, byte>(pictureSrc);
-            imageFilt = img1.Convert<Gray, Single>();
+            if(pictureSrc!=null)
+            {
+                Image<Bgr, byte> img1 = new Image<Bgr, byte>(pictureSrc);
+                imageFilt = img1.Convert<Gray, Single>();
+
+
+                ImageBrush imageBrush = new ImageBrush(Bitmap2BitmapImage(imageFilt.ToBitmap()));
+                filtredPicture.Fill = imageBrush;
+
+                CvInvoke.WaitKey(0);
+            }
             
-
-            ImageBrush imageBrush = new ImageBrush(Bitmap2BitmapImage(imageFilt.ToBitmap()));
-            filtredPicture.Fill= imageBrush;
-
-            CvInvoke.WaitKey(0);
         }
         private void filterSobButton_Click(object sender, RoutedEventArgs e)
         {
-            Image<Bgr, byte> img1 = new Image<Bgr, byte>(pictureSrc);
-            Image<Gray, byte> imageBW = img1.Convert<Gray, byte>();
-            imageFilt = (imageBW.Sobel(1, 0, 5));
+            if (pictureSrc != null)
+            {
+                Image<Bgr, byte> img1 = new Image<Bgr, byte>(pictureSrc);
+                Image<Gray, byte> imageBW = img1.Convert<Gray, byte>();
+                imageFilt = (imageBW.Sobel(1, 0, 5));
 
-            ImageBrush imageBrush = new ImageBrush(Bitmap2BitmapImage(imageFilt.ToBitmap()));
-            filtredPicture.Fill = imageBrush;
+                ImageBrush imageBrush = new ImageBrush(Bitmap2BitmapImage(imageFilt.ToBitmap()));
+                filtredPicture.Fill = imageBrush;
 
+
+                CvInvoke.WaitKey(0);
+            }
             
-            CvInvoke.WaitKey(0);
             
         }
 
         private void ShowImageButton_Click(object sender, RoutedEventArgs e)
         {
-            CvInvoke.Imshow("Image",imageFilt);
-            CvInvoke.WaitKey(0);
+            if (pictureSrc != null)
+            {
+                CvInvoke.Imshow("Image",imageFilt);
+                CvInvoke.WaitKey(0);
+
+            }
+                
 
         }
 

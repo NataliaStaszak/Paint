@@ -1,8 +1,15 @@
-﻿using System.Drawing;
+﻿using Emgu.CV;
+using Emgu.CV.XPhoto;
+using Microsoft.Win32;
+using System;
+using System.Drawing;
+using System.IO;
+using System.IO.Enumeration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1;
 using Point = System.Windows.Point;
@@ -12,6 +19,7 @@ namespace WpfApplication1
     public partial class MainWindow : Window
     {
         private bool isDrawing = false;
+        private bool isRubbering = false;
         private Point startPoint;
         public static SolidColorBrush? currentColor { get; set; }
         private double currentSize = 2;
@@ -21,6 +29,7 @@ namespace WpfApplication1
         private bool isCircleClicked = false;
         private bool isRectangleClicked = false;
         private bool isSquareClicked = false;
+        private bool isRubberClicked = false;
 
         public MainWindow()
         {
@@ -37,6 +46,14 @@ namespace WpfApplication1
                 {
                     startPoint = e.GetPosition(canvas);
                     isDrawing = true;
+                }
+            }
+            if (isRubberClicked){
+                currentColor = System.Windows.Media.Brushes.White;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    startPoint = e.GetPosition(canvas);
+                    isRubbering = true;
                 }
             }
             if (isPointClicked)
@@ -91,11 +108,30 @@ namespace WpfApplication1
 
                 startPoint = endPoint;
             }
+            if (isRubbering)
+            {
+                Point endPoint = e.GetPosition(canvas);
+
+                Line line = new Line
+                {
+                    X1 = startPoint.X,
+                    Y1 = startPoint.Y,
+                    X2 = endPoint.X,
+                    Y2 = endPoint.Y,
+                    Stroke = System.Windows.Media.Brushes.White,
+                    StrokeThickness = currentSize
+                };
+
+                canvas.Children.Add(line);
+
+                startPoint = endPoint;
+            }
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             isDrawing = false;
+            isRubbering = false;
         }
 
         //Buttons Fun
@@ -158,6 +194,63 @@ namespace WpfApplication1
             Window2 newWindow = new Window2();
             newWindow.Show();
         }
+        private void rubberButton_Click(object sender, RoutedEventArgs e)
+        {
+            setAllFalse();
+            isRubberClicked = true;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string pictureSrc="";
+            SaveFileDialog openFileDialog = new SaveFileDialog();
+            openFileDialog.Title = "Wybierz obraz";
+            openFileDialog.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png";
+            openFileDialog.DefaultExt = "PNG";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                pictureSrc = openFileDialog.FileName;
+            }
+            if (pictureSrc !="")
+            {
+                Rect bounds = VisualTreeHelper.GetDescendantBounds(canvas);
+                double dpi = 96d;
+
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+
+                DrawingVisual dv = new DrawingVisual();
+                using (DrawingContext dc = dv.RenderOpen())
+                {
+                    VisualBrush vb = new VisualBrush(canvas);
+                    dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
+                }
+
+                rtb.Render(dv);
+
+                BitmapEncoder pngEncoder = new PngBitmapEncoder();
+                pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+
+                    pngEncoder.Save(ms);
+                    ms.Close();
+
+                    System.IO.File.WriteAllBytes(pictureSrc, ms.ToArray());
+                    MessageBox.Show("Zapisano");
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
+            }
+            
+        }
+
+      
 
         //drawing fun
         private void DrawPoint(double x, double y)
@@ -224,6 +317,7 @@ namespace WpfApplication1
             isCircleClicked = false;
             isRectangleClicked = false;
             isSquareClicked = false;
+            isRubberClicked = false;
         } 
 
 

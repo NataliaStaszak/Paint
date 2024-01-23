@@ -25,7 +25,6 @@
                     <ComboBoxItem Content="Różowy" Background="HotPink"/>
                     <ComboBoxItem Content="Czarny" Background="Black"/>
                     <ComboBoxItem Content="Szary" Background="DimGray"/>
-                    <ComboBoxItem Content="own" Background="Bisque"/>
                 </ComboBox>
             </GroupBox>
            
@@ -61,6 +60,13 @@
             <GroupBox Grid.Column="0">
                 <Button Grid.Column="0" Content="narzędzie obróbki obrazów" Width="150" Click="pictureButton_Click"  Background="Pink"/>
             </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="gumka" Width="150" Click="rubberButton_Click"  Background="Pink"/>
+            </GroupBox>
+            <GroupBox Grid.Column="0">
+                <Button Grid.Column="0" Content="zapisz swoje dzieło" Width="150" Click="saveButton_Click"  Background="Pink"/>
+            </GroupBox>
+        
             
            
            
